@@ -22,13 +22,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING(19)
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING(19)
       }
-    });
+    }).then(() => queryInterface.addIndex('Users', ['createdAt', 'updatedAt']));
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Users');

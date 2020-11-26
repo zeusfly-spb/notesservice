@@ -15,14 +15,6 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-
-
-// const { sequelize, Sequelize } = require('../orm')
-// const fs = require('fs');
-// const path = require('path');
-// const basename = path.basename(__filename);
-// const db = {};
-
 fs
   .readdirSync(__dirname)
   .filter(file => {
