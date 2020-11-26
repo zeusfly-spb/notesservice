@@ -10,7 +10,8 @@ module.exports = {
       },
       login: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true  
       },
       password: {
         allowNull: false,
@@ -28,7 +29,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(19)
       }
-    }).then(() => queryInterface.addIndex('Users', ['createdAt', 'updatedAt']));
+    })
+    .then(() => queryInterface.addIndex('Users',
+      ['createdAt', 'updatedAt']
+    ))
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Users');
