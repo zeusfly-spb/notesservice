@@ -1,16 +1,16 @@
 <template>
   <div id="app" class="container">
-    <login-page/>
+    <register-view/>
   </div>
 </template>
 
 <script>
-import LoginPage from './components/LoginPage.vue'
+import RegisterView from './components/RegisterView.vue'
 
 export default {
   name: 'App',
   components: {
-    LoginPage
+    RegisterView
   }
 }
 </script>

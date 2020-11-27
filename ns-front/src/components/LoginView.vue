@@ -16,7 +16,11 @@
             >
                 person
             </i>
-            <input type="text">
+            <input 
+                type="text"
+                v-model="login"
+                ref="loginInput"
+            >
         </div>
         <div
             class="credentials"
@@ -27,7 +31,10 @@
             >
                 lock
             </i>
-            <input type="password">
+            <input 
+                type="password"
+                v-model="password"
+            >
         </div>
         <div>
             <button>
@@ -44,15 +51,24 @@
 
 <script>
     export default {
-        name: 'LoginPage',
+        name: 'LoginView',
         data: () => ({
             login: '',
             password: ''
-        })
+        }),
+        mounted () {
+            this.$refs.loginInput.focus()
+        }
     }
 </script>
 
 <style scoped>
+    i {color: rgba(0,0,0,.54);}
+    a {
+        text-decoration: none;
+        font-size: small;
+    }
+    input {outline:none;}    
     .footer-login {
         padding-right: 1em;
         justify-content: flex-end;
@@ -73,7 +89,7 @@
         display: flex;
         flex-direction: column;
         width: 30em;
-        height: 10em;
+        height: 9.5em;
         background-color: #E3F2FD;
         box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
         border-radius: .3em;
