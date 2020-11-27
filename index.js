@@ -11,10 +11,12 @@ const JwtStrategy = passportJWT.Strategy
 const jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
 jwtOptions.secretOrKey = 'jambaLeo'
+let authUser = null
 
 const strategy = new JwtStrategy(jwtOptions, async function (jwt_payload, next) {
     const user = await UserController.findById(jwt_payload.id)
     if (user) {
+        authUser = user
         next(null, user)
     } else {
         next(null, false)
@@ -60,7 +62,7 @@ app.post('/login', async function (req, res) {
 })
 
 app.get('/secret', passport.authenticate('jwt', {session: false}), function (req, res) {
-    res.json({message: 'all right!'})
+    res.json({message: 'all right!', user: authUser})
 })
 app.get('/shared', function (req, res) {
     res.json({query: req.query})
