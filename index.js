@@ -1,13 +1,15 @@
+const argon2 = require('argon2')
 const express = require('express')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
 const passportJWT = require('passport-jwt')
 const UserController = require('./controllers/UserController')
-const e = require('express')
 
 const ExtractJwt = passportJWT.ExtractJwt
 const JwtStrategy = passportJWT.Strategy
+let jwtOptions = {secretOrKey: 'jambaLeo'}
+
 
 const app = express()
 app.use(passport.initialize())
@@ -21,11 +23,6 @@ app.get('/', (req, res) => {
     res.json({message: 'Express is up!'})    
 })
 
-app.post('/login', function (req, res) {
-    const name = req.body.login
-    const password = req.body.password
-})
-
 app.post('/register', async function (req, res) {
     try {
         const login = req.body.login
@@ -33,6 +30,21 @@ app.post('/register', async function (req, res) {
         res.json(await UserController.register({login, password}))
     } catch (e) {
         res.json({error: `${e}`})
+    }
+})
+
+app.post('/login', async function (req, res) {
+    try {
+        const user = await UserController.findByLogin(req.body.login)
+        if (await argon2.verify(user.password, req.body.password)) {
+            const payload = {id: user.id}
+            const token = jwt.sign(payload, jwtOptions.secretOrKey)
+            res.json({message: 'OK', token: token})
+        } else {
+            res.status(401).json({message: 'Password did not match'})
+        }
+    } catch (e) {
+        res.json({error: `Login error: ${e}`})
     }
 })
 

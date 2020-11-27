@@ -15,6 +15,16 @@ const register = async data => {
     }
 }
 
+const findByLogin = async login => {
+    try {
+        const user = await User.findOne({where: {login: login}})
+        return Promise.resolve(user.toJSON())
+    } catch (e) {
+        return Promise.reject(new Error(`User find error: ${e}`))
+    }
+}
+
 module.exports = { 
-    register 
+    register,
+    findByLogin
 }
