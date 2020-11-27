@@ -61,7 +61,9 @@
         <div
             class="footer-register"
         >
-            <a href="/register">Войти</a>
+            <router-link to="/login">
+                Войти
+            </router-link>
         </div>
     </div>
 </template>

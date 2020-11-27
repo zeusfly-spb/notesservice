@@ -1,18 +1,13 @@
 <template>
   <div id="app" class="container">
-    <register-view/>
+     <router-view/>
   </div>
 </template>
 
 <script>
-import RegisterView from './components/RegisterView.vue'
-
 export default {
-  name: 'App',
-  components: {
-    RegisterView
-  }
-}
+  name: 'App'
+ }
 </script>
 
 <style>

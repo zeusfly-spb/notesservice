@@ -20,6 +20,7 @@
                 type="text"
                 v-model="login"
                 ref="loginInput"
+                placeholder="Имя пользователя"
             >
         </div>
         <div
@@ -34,6 +35,7 @@
             <input 
                 type="password"
                 v-model="password"
+                placeholder="Пароль"
             >
         </div>
         <div>
@@ -44,7 +46,9 @@
         <div
             class="footer-login"
         >
-            <a href="/register">Регистрация</a>
+            <router-link to="/register">
+                Регистрация
+            </router-link>
         </div>
     </div>
 </template>
