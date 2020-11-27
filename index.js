@@ -8,8 +8,19 @@ const UserController = require('./controllers/UserController')
 
 const ExtractJwt = passportJWT.ExtractJwt
 const JwtStrategy = passportJWT.Strategy
-let jwtOptions = {secretOrKey: 'jambaLeo'}
+const jwtOptions = {}
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
+jwtOptions.secretOrKey = 'jambaLeo'
 
+const strategy = new JwtStrategy(jwtOptions, async function (jwt_payload, next) {
+    const user = await UserController.findById(jwt_payload.id)
+    if (user) {
+        next(null, user)
+    } else {
+        next(null, false)
+    }
+})
+passport.use(strategy)
 
 const app = express()
 app.use(passport.initialize())
@@ -47,5 +58,13 @@ app.post('/login', async function (req, res) {
         res.json({error: `Login error: ${e}`})
     }
 })
+
+app.get('/secret', passport.authenticate('jwt', {session: false}), function (req, res) {
+    res.json({message: 'all right!'})
+})
+app.get('/shared', function (req, res) {
+    res.json({query: req.query})
+})
+
 
 app.listen(3000, () => console.log("Express running"))

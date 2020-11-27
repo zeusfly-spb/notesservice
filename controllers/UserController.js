@@ -24,7 +24,17 @@ const findByLogin = async login => {
     }
 }
 
+const findById = async id => {
+    try {
+        const user = await User.findByPk(id)
+        return Promise.resolve(user.toJSON())
+    } catch (e) {
+        return Promise.reject(new Error(`User find error: ${e}`))
+    }
+}
+
 module.exports = { 
     register,
-    findByLogin
+    findByLogin,
+    findById
 }
