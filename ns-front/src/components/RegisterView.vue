@@ -1,4 +1,7 @@
 <template>
+<div
+    class="container"
+>
     <div
         class="register-form"
     >
@@ -66,6 +69,7 @@
             </router-link>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -110,7 +114,7 @@
         display: flex;
         flex-direction: column;
         width: 30em;
-        height: 12em;
+        height: 11em;
         background-color: #E3F2FD;
         box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
         border-radius: .3em;

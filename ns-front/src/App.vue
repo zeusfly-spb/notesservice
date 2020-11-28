@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="container">
+  <div 
+    id="app"
+    class="main-layout"
+  >
      <router-view/>
   </div>
 </template>
@@ -11,6 +14,9 @@ export default {
 </script>
 
 <style>
+  .main-layout {
+    font-family: Roboto;
+  }
   .container {
     margin: 0 auto;
     min-height: 100vh;

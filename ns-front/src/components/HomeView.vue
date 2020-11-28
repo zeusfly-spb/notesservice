@@ -1,0 +1,45 @@
+<template>
+    <div>
+        <div
+            class="home-header"
+        >
+            <span
+                style="margin-left: 1em"
+            >
+                Личный кабинет
+            </span>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'HomeView',
+        data: () => ({
+        }),
+        computed: {
+            authUser () {
+                return this.$store.state.authUser
+            }
+        },
+        mounted () {
+        }
+    }
+</script>
+
+<style scoped>
+    i {color: rgba(0,0,0,.54);}
+    a {
+        text-decoration: none;
+        font-size: small;
+    }
+    input {outline:none;}
+    .home-header {
+        display: flex;
+        align-items: center;
+        height: 4em;
+        background-color: #f5f5f5;
+        box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+        border-radius: .3em;
+    }    
+</style>

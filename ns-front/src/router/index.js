@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 const RegisterView = require('../components/RegisterView.vue').default
 const LoginView = require('../components/LoginView.vue').default
+const HomeView = require('../components/HomeView.vue').default
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ const routes = [
         path: '/login',
         component: LoginView,
         meta: {title: 'Авторизация'}
+    },
+    {
+        path: '/home',
+        component: HomeView,
+        meta: {title: 'Личный кабинет'}
     },
     {
         path: '*',
