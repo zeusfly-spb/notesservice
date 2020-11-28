@@ -81,12 +81,15 @@
             passwordConfirm: ''
         }),
         computed: {
-            loginError () {
-                return !this.login.length
-            },
             valid () {
                 return [this.login, this.password, this.passwordConfirm].every(item => !!item.length) && this.password === this.passwordConfirm
             }
+        },
+        methods: {
+            registerUser () {
+                if (!this.valid) {
+                    retrun
+                }
         },
         mounted () {
             this.$refs.loginInput.focus()
