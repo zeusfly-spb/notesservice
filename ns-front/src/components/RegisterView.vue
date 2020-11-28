@@ -80,6 +80,14 @@
             password: '',
             passwordConfirm: ''
         }),
+        computed: {
+            loginError () {
+                return !this.login.length
+            },
+            valid () {
+                return [this.login, this.password, this.passwordConfirm].every(item => !!item.length) && this.password === this.passwordConfirm
+            }
+        },
         mounted () {
             this.$refs.loginInput.focus()
         }
@@ -92,7 +100,10 @@
         text-decoration: none;
         font-size: small;
     }
-    input {outline:none;}    
+    input {outline:none;}
+    .input-error {
+        border:2px solid red;
+    }    
     .footer-register {
         padding-right: .5em;
         justify-content: flex-end;
