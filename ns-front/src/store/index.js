@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        notes: [],
         token: null,
         authUser: null,
         registeredUser: null
@@ -49,9 +50,22 @@ export const store = new Vuex.Store({
                     })
                     .catch(e => reject(e))
             })
+        },
+        setNotes ({commit}) {
+            return new Promise((resolve, reject) => {
+                Vue.axios.get('/notes')
+                    .then(res => {
+                        commit('SET_NOTES', res.data)
+                        resolve(res)
+                    })
+                    .catch(e => reject(e))
+            })
         }
     },
     mutations: {
+        SET_NOTES (state, notes) {
+            state.notes = notes
+        },
         AUTH_LOGOUT (state) {
             state.token = null
             state.authUser = null

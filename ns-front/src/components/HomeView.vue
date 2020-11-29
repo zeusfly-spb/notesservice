@@ -33,10 +33,7 @@
                 this.$store.commit('AUTH_LOGOUT')
             }
         },
-        watch: {
-            authUser (val) {
-                !val ? this.$router.replace('/login') : null
-            }
+        mounted () {
         }
     }
 </script>
