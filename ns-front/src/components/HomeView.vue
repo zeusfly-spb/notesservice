@@ -6,7 +6,7 @@
             <span
                 style="margin-left: 1em"
             >
-                Личный кабинет
+                Личный кабинет <span class="user-name">{{ userName }}</span>
             </span>
         </div>
     </div>
@@ -18,6 +18,9 @@
         data: () => ({
         }),
         computed: {
+            userName () {
+                return this.authUser && this.authUser.login || ''
+            },
             authUser () {
                 return this.$store.state.authUser
             }
@@ -34,6 +37,10 @@
         font-size: small;
     }
     input {outline:none;}
+    .user-name {
+        color: #1565C0;
+        font-weight: bold;
+    }
     .home-header {
         display: flex;
         align-items: center;

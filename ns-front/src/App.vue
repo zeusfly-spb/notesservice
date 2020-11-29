@@ -9,7 +9,15 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    token () {
+      return this.$store.state.token
+    },
+    authUser () {
+      return this.$store.state.authUser
+    }    
+  }
  }
 </script>
 

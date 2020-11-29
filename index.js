@@ -54,7 +54,7 @@ app.post('/login', async function (req, res) {
         if (await argon2.verify(user.password, req.body.password)) {
             const payload = {id: user.id}
             const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 3600})
-            res.json({message: 'OK', token: token})
+            res.json({message: 'OK', token: token, user: user})
         } else {
             res.status(401).json({message: 'Password did not match'})
         }

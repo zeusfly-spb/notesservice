@@ -39,10 +39,13 @@
                 type="password"
                 v-model="password"
                 placeholder="Пароль"
+                @keyup.enter="logIn"
             >
         </div>
         <div>
-            <button>
+            <button
+                @click="logIn"
+            >
                 Войти
             </button>
         </div>
@@ -64,8 +67,32 @@
             login: '',
             password: ''
         }),
+        computed: {
+            authUser () {
+                return this.$store.state.authUser
+            },
+            valid () {
+                return this.login.length > 0 && this.password.length > 0
+            }
+        },
+        methods: {
+            logIn () {
+                if (!this.valid) { return }
+                this.$store.dispatch('logIn', {
+                    login: this.login,
+                    password: this.password
+                })
+                .then(() => {})
+                .catch(e => alert(e))
+            }
+        },
         mounted () {
             this.$refs.loginInput.focus()
+        },
+        watch: {
+            authUser (val) {
+                val ? this.$router.replace('/home') : null
+            }
         }
     }
 </script>
