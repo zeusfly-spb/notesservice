@@ -52,6 +52,13 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
+        AUTH_LOGOUT (state) {
+            state.token = null
+            state.authUser = null
+            Cookies.remove('ns-token')
+            delete Vue.axios.defaults.headers.common['Authorization']
+            Vue.axios.get('/details')
+        },
         SAVE_TOKEN (state, token) {
             let now = new Date()
             now.setMinutes(1 + now.getMinutes())

@@ -24,7 +24,6 @@ Vue.axios.interceptors.response.use(
 )
 
 const token = window.Cookies.get('ns-token')
-console.log(token)
 if (token) {
   store.commit('SAVE_TOKEN', token)
   store.dispatch('getDetails')    

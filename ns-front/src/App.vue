@@ -22,6 +22,13 @@ export default {
 </script>
 
 <style>
+  .clickable {
+    opacity: .7;
+    cursor: pointer;
+  }
+  .clickable:hover {
+    opacity: 1;
+  }
   .main-layout {
     font-family: Roboto;
   }
