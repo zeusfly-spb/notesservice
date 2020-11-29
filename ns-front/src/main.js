@@ -27,19 +27,8 @@ const token = window.Cookies.get('ns-token')
 console.log(token)
 if (token) {
   store.commit('SAVE_TOKEN', token)
-    // Vue.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-    // setInterval(() => {
-    //     let now = new Date()
-    //     now.setMinutes(1 + now.getMinutes())
-    //     window.Cookies.set('isi-token', token, {expires: now, path: '/'})
-    // }, 30000)
-
-} else {
-
-    // store.dispatch('logOut')
-    //     .then(() => router.push('/login'))
+  store.dispatch('getDetails')    
 }
-
 Vue.config.productionTip = false
 new Vue({
   store,

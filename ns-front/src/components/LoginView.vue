@@ -87,6 +87,7 @@
             }
         },
         mounted () {
+            this.authUser ? this.$router.replace('/home') : null
             this.$refs.loginInput.focus()
         },
         watch: {

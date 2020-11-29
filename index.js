@@ -63,6 +63,9 @@ app.post('/login', async function (req, res) {
     }
 })
 
+app.get('/details', passport.authenticate('jwt', {session: false}), function (req, res) {
+    res.json(authUser)
+})
 app.get('/secret', passport.authenticate('jwt', {session: false}), function (req, res) {
     res.json({message: 'all right!', user: authUser})
 })

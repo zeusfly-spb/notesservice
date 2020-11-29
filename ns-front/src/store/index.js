@@ -39,6 +39,16 @@ export const store = new Vuex.Store({
                     })
                     .catch(e => reject(e))
             })
+        },
+        getDetails ({commit}) {
+            return new Promise((resolve, reject) => {
+                Vue.axios.get('/details')
+                    .then(res => {
+                        commit('SET_AUTH_USER', res.data)
+                        resolve(res)
+                    })
+                    .catch(e => reject(e))
+            })
         }
     },
     mutations: {
