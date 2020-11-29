@@ -1,5 +1,6 @@
 const argon2 = require('argon2')
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
@@ -25,6 +26,7 @@ const strategy = new JwtStrategy(jwtOptions, async function (jwt_payload, next) 
 passport.use(strategy)
 
 const app = express()
+app.use(cors())
 app.use(passport.initialize())
 app.use(bodyParser.urlencoded({
     extended: true

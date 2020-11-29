@@ -57,7 +57,9 @@
             >
         </div>
         <div>
-            <button>
+            <button
+                @click="registerUser"
+            >
                 Регистрировать
             </button>
         </div>
@@ -81,15 +83,25 @@
             passwordConfirm: ''
         }),
         computed: {
+            registeredUser () {
+                return this.$store.state.registeredUser
+            },
             valid () {
-                return [this.login, this.password, this.passwordConfirm].every(item => !!item.length) && this.password === this.passwordConfirm
+                return [this.login, this.password, this.passwordConfirm].every(item => item.length > 0) && this.password === this.passwordConfirm
             }
         },
         methods: {
             registerUser () {
                 if (!this.valid) {
-                    retrun
+                    return
                 }
+                this.$store.dispatch('registerUser', {
+                    login: this.login,
+                    password: this.password
+                })
+                    .then(() => this.$router.push('/welcome'))
+                    .catch(e => console.error(e))
+            },
         },
         mounted () {
             this.$refs.loginInput.focus()
