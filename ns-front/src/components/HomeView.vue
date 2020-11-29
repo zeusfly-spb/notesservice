@@ -31,6 +31,7 @@
         methods: {
             logOut () {
                 this.$store.commit('AUTH_LOGOUT')
+                this.$router.replace('/login')
             }
         },
         mounted () {

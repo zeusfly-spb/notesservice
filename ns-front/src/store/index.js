@@ -31,7 +31,6 @@ export const store = new Vuex.Store({
             return new Promise((resolve, reject) => {
                 Vue.axios.post('/login', {...data})
                     .then(res => {
-                        console.log(res)
                         if (res.status === 200 && res.statusText === 'OK' && res.data.message === 'OK' && res.data.user && res.data.token) {
                             commit('SAVE_TOKEN', res.data.token)
                             commit('SET_AUTH_USER', res.data.user)
@@ -51,9 +50,9 @@ export const store = new Vuex.Store({
                     .catch(e => reject(e))
             })
         },
-        setNotes ({commit}) {
+        setNotes ({commit, state}) {
             return new Promise((resolve, reject) => {
-                Vue.axios.get('/notes')
+                Vue.axios.post('/notes', {user_id: state.authUser.id})
                     .then(res => {
                         commit('SET_NOTES', res.data)
                         resolve(res)
@@ -71,7 +70,6 @@ export const store = new Vuex.Store({
             state.authUser = null
             Cookies.remove('ns-token')
             delete Vue.axios.defaults.headers.common['Authorization']
-            Vue.axios.get('/details')
         },
         SAVE_TOKEN (state, token) {
             let now = new Date()

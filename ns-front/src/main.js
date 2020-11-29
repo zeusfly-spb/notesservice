@@ -27,6 +27,8 @@ const token = window.Cookies.get('ns-token')
 if (token) {
   store.commit('SAVE_TOKEN', token)
   store.dispatch('getDetails')    
+} else {
+  store.commit('AUTH_LOGOUT')
 }
 Vue.config.productionTip = false
 new Vue({
