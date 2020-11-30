@@ -77,6 +77,13 @@ app.post('/addnote', passport.authenticate('jwt', {session: false}), async funct
     const text = req.body.text
     res.json(await UserController.addNote({userId: user_id, text: text}))
 })
+
+app.post('/update_note', passport.authenticate('jwt', {session: false}), async function (req, res) {
+    const id = req.body.id
+    const text = req.body.text
+    res.json(await UserController.updateNote({id, text}))
+})
+
 app.get('/details', passport.authenticate('jwt', {session: false}), function (req, res) {
     res.json(authUser)
 })

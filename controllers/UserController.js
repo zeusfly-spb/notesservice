@@ -51,10 +51,21 @@ const addNote = async data => {
     }
 }
 
+const updateNote = async data => {
+    try {
+        const note = await Note.findByPk(data.id)
+        await note.update({text: data.text})
+        return Promise.resolve(note)
+    } catch (e) {
+        return Promise.reject(new Error(`Update note failed: ${e}`))
+    }
+}
+
 module.exports = { 
     register,
     findByLogin,
     findById,
     userNotes,
-    addNote
+    addNote,
+    updateNote
 }

@@ -79,7 +79,12 @@
         },
         methods: {
             updateNote () {
-              this.close()
+              this.$store.dispatch('updateNote', {
+                id: this.editingNote.id,
+                text: this.text
+              })
+                .then(() => this.close())
+                .catch(e => alert(e))              
             },
             resetInputs () {
               this.text = ''
@@ -104,7 +109,11 @@
         },
         watch: {
           editingNote (val) {
-            val ? this.text = val.text : null
+            const action = () => {
+              this.text = val.text
+              this.$refs.textarea.focus()
+            }
+            val ? action() : null
           },
           dialog (val) {
             !val ? this.resetInputs() : this.$refs.textarea.focus()

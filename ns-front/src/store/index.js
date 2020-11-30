@@ -1,4 +1,5 @@
 const Cookies = require('js-cookie')
+import { reject } from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
@@ -71,9 +72,22 @@ export const store = new Vuex.Store({
                     })
                     .catch(e => reject(e))
             })
+        },
+        updateNote ({commit}, data) {
+            return new Promise((resolve, reject) => {
+                Vue.axios.post('/update_note', {...data})
+                    .then(res => {
+                        commit('UPDATE_NOTE', res.data)
+                        resolve(res)
+                    })
+                    .catch(e => reject(e))
+            })
         }
     },
     mutations: {
+        UPDATE_NOTE (state, note) {
+            state.notes = state.notes.map(item => +item.id === +note.id ? note : item)
+        },
         SET_EDITING_NOTE (state, note) {
             state.editingNote = note
         },
