@@ -56,6 +56,10 @@ export default {
     color: white;
     background-color: #47a7f5;
   }
+  .blue-text {
+    color: #47a7f5;
+    background-color: white;
+  }
   .mr-1 {
     margin-right: 1em;
   }

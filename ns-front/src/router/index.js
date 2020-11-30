@@ -33,14 +33,14 @@ const routes = [
         meta: {title: 'Успешная регистрация', auth: false}
     },
     {
-        path: '/shared',
+        path: '/shared/:link',
         component: SharedView,
         meta: {title: 'Заметка в доступе', auth: false}
     },
-    // {
-    //     path: '*',
-    //     redirect: '/login'
-    // }
+    {
+        path: '*',
+        redirect: '/login'
+    }
 ]
 
 export function createRouter () {

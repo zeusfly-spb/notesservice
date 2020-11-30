@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        sharedNote: null,
         deletingNote: null,
         editingNote: null,
         dialog: false,
@@ -103,9 +104,23 @@ export const store = new Vuex.Store({
                     })
                     .catch(e => reject(e))
             })
+        },
+        getSharedNote ({commit}, link) {
+            console.log('getting note by link: ' + link)
+            return new Promise((resolve, reject) => {
+                Vue.axios.post('/shared', {link: link})
+                    .then(res => {
+                        commit('SET_SHARED_NOTE', res.data)
+                        resolve(res)                        
+                    })
+                    .catch(e => reject(e))
+            })
         }
     },
     mutations: {
+        SET_SHARED_NOTE (state, note) {
+            state.sharedNote = note
+        },
         DELETE_NOTE (state, id) {
             state.notes = state.notes.filter(item => +item.id != +id)
             state.deletingNote = null

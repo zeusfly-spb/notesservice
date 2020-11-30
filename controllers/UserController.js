@@ -83,6 +83,15 @@ const shareNote = async data => {
     }
 }
 
+const getShared = async link => {
+    try {
+        const note = await Note.findOne({where: {link: link}, include: ['user']})
+        return Promise.resolve(note)
+    } catch (e) {
+        return Promise.reject(new Error(`Shared link load error: ${e}`))
+    }
+}
+
 module.exports = { 
     register,
     findByLogin,
@@ -91,5 +100,6 @@ module.exports = {
     addNote,
     updateNote,
     deleteNote,
-    shareNote
+    shareNote,
+    getShared
 }

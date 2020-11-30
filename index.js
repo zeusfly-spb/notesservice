@@ -101,8 +101,9 @@ app.get('/details', passport.authenticate('jwt', {session: false}), function (re
 app.get('/secret', passport.authenticate('jwt', {session: false}), function (req, res) {
     res.json({message: 'all right!', user: authUser})
 })
-app.get('/shared', function (req, res) {
-    res.json({query: req.query})
+app.post('/shared', async function (req, res) {
+    const link = req.body.link
+    res.json(await UserController.getShared(link))
 })
 
 
