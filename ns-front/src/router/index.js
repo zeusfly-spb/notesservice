@@ -7,6 +7,7 @@ const RegisterView = require('../components/RegisterView.vue').default
 const LoginView = require('../components/LoginView.vue').default
 const HomeView = require('../components/HomeView.vue').default
 const WelcomeView = require('../components/WelcomeView.vue').default
+const SharedView = require('../components/SharedView.vue').default
 
 Vue.use(VueRouter)
 
@@ -32,9 +33,14 @@ const routes = [
         meta: {title: 'Успешная регистрация', auth: false}
     },
     {
-        path: '*',
-        redirect: '/login'
-    }
+        path: '/shared',
+        component: SharedView,
+        meta: {title: 'Заметка в доступе', auth: false}
+    },
+    // {
+    //     path: '*',
+    //     redirect: '/login'
+    // }
 ]
 
 export function createRouter () {

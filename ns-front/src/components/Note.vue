@@ -66,7 +66,7 @@
         },
         computed: {
             link () {
-                return `${document.location.host}/shared/${this.note.link}`
+                return `${document.location.host}/shared/:${this.note.link}`
             },
             shared () {
                 return !!this.note.link
