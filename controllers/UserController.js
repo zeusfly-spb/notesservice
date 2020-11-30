@@ -1,5 +1,6 @@
 const argon2 = require('argon2')
 const models = require('../models')
+const {v4} = require('uuid')
 const User = models.User
 const Note = models.Note
 
@@ -71,6 +72,17 @@ const deleteNote = async id => {
     }
 }
 
+const shareNote = async data => {
+    try {
+        const note = await Note.findByPk(data.note_id)
+        const link = data.mode ? v4() : null
+        await note.update({link})
+        return Promise.resolve(note)
+    } catch (e) {
+        return Promise.reject(new Error(`Share note feature failed: ${e}`))
+    }
+}
+
 module.exports = { 
     register,
     findByLogin,
@@ -78,5 +90,6 @@ module.exports = {
     userNotes,
     addNote,
     updateNote,
-    deleteNote
+    deleteNote,
+    shareNote
 }

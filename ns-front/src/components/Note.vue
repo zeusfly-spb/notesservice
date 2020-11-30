@@ -16,12 +16,24 @@
             {{ note.createdAt | moment('DD/MM/YY HH:mm') }}
         </td>
         <td
+            class="link-field"
+        >
+            <i
+                v-if="note.link" 
+                class="material-icons clickable"
+                title="Скопировать ссылку"
+            >
+                link
+            </i>
+        </td>
+        <td
             align="right"
             class="actions"
         >
             <i 
                 class="material-icons small valign blue clickable"
                 title="Редактировать"
+                @click="shareNote"
             >
                 share
             </i>
@@ -49,7 +61,18 @@
             index: Number,
             note: Object
         },
+        computed: {
+            shared () {
+                return !!this.note.link
+            }
+        },
         methods: {
+            shareNote () {
+                this.$store.dispatch('shareNote', {
+                    note_id: this.note.id,
+                    mode: !this.shared
+                })
+            },
             toEdit () {
                 this.$store.commit('SET_EDITING_NOTE', this.note)
             },
@@ -61,6 +84,9 @@
 </script>
 
 <style scoped>
+    .link-field {
+        width: 2em;
+    }
     .note-text {
         margin-left: 0.2em;
     }

@@ -93,6 +93,16 @@ export const store = new Vuex.Store({
                     })
                     .catch(e => reject(e))
             })
+        },
+        shareNote ({commit}, data) {
+            return new Promise((resolve, reject) => {
+                Vue.axios.post('/share_note', {...data})
+                    .then(res => {
+                        commit('UPDATE_NOTE', res.data)
+                        resolve(res)
+                    })
+                    .catch(e => reject(e))
+            })
         }
     },
     mutations: {
