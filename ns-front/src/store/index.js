@@ -85,6 +85,7 @@ export const store = new Vuex.Store({
         AUTH_LOGOUT (state) {
             state.token = null
             state.authUser = null
+            state.notes = []
             Cookies.remove('ns-token')
             delete Vue.axios.defaults.headers.common['Authorization']
         },

@@ -6,7 +6,9 @@
         >
         {{ index + 1 }}
         </td>
-        <td>{{ note.text }}</td>
+        <td>
+            <span class="note-text">{{ note.text }}</span>
+        </td>
         <td
             align="center"
             class="created"
@@ -49,6 +51,9 @@
 </script>
 
 <style scoped>
+    .note-text {
+        margin-left: 0.2em;
+    }
     .index {
         width: 3em;
     }

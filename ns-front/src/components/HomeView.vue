@@ -43,6 +43,9 @@
                 this.$router.replace('/login')
             }
         },
+        mounted() {
+            this.authUser ? this.$store.dispatch('setNotes', this.authUser.id) : null
+        },
         watch: {
             authUser (val) {
                 val ? this.$store.dispatch('setNotes', val.id) : null
