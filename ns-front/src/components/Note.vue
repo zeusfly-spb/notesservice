@@ -35,6 +35,7 @@
             <i 
                 class="material-icons small valign red-text clickable"
                 title="Удалить"
+                @click="toDelete"
             >
                 delete
             </i>
@@ -51,6 +52,9 @@
         methods: {
             toEdit () {
                 this.$store.commit('SET_EDITING_NOTE', this.note)
+            },
+            toDelete () {
+                this.$store.commit('SET_DELETING_NOTE', this.note)
             }
         }
     }

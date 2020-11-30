@@ -61,11 +61,22 @@ const updateNote = async data => {
     }
 }
 
+const deleteNote = async id => {
+    try {
+        const note = await Note.findByPk(id)
+        await note.destroy()
+        return Promise.resolve(id)
+    } catch (e) {
+        return Promise.reject(new Error(`Delete node failed: ${e}`))
+    }
+}
+
 module.exports = { 
     register,
     findByLogin,
     findById,
     userNotes,
     addNote,
-    updateNote
+    updateNote,
+    deleteNote
 }

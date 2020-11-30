@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        deletingNote: null,
         editingNote: null,
         dialog: false,
         notes: [],
@@ -82,9 +83,26 @@ export const store = new Vuex.Store({
                     })
                     .catch(e => reject(e))
             })
+        },
+        deleteNote ({commit}, id) {
+            return new Promise ((resolve, reject) => {
+                Vue.axios.post('/delete_note', {id: id})
+                    .then(res => {
+                        commit('DELETE_NOTE', res.data.id)
+                        resolve(res)
+                    })
+                    .catch(e => reject(e))
+            })
         }
     },
     mutations: {
+        DELETE_NOTE (state, id) {
+            state.notes = state.notes.filter(item => +item.id != +id)
+            state.deletingNote = null
+        },
+        SET_DELETING_NOTE (state, note) {
+            state.deletingNote = note
+        },
         UPDATE_NOTE (state, note) {
             state.notes = state.notes.map(item => +item.id === +note.id ? note : item)
         },

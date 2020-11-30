@@ -28,6 +28,9 @@
             v-show="dialog || editingNote"
             @close="hideDialog"
         />
+        <confirm
+            v-show="confirm"
+        />
     </div>
 </template>
 
@@ -35,9 +38,13 @@
     // eslint-disable-next-line no-unused-vars
     import Note from './Note'
     import Modal from './Modal'
+    import Confirm from './Confirm'
     export default {
         name: 'Notes',
         computed: {
+            confirm () {
+                return !!this.$store.state.deletingNote
+            },
             editingNote () {
                 return this.$store.state.editingNote
             },
@@ -63,6 +70,7 @@
             }
         },
         components: {
+            Confirm,
             Modal,
             Note
         }

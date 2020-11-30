@@ -84,6 +84,11 @@ app.post('/update_note', passport.authenticate('jwt', {session: false}), async f
     res.json(await UserController.updateNote({id, text}))
 })
 
+app.post('/delete_note', passport.authenticate('jwt', {session: false}),  async function (req, res) {
+    const id = req.body.id
+    res.json({id: await UserController.deleteNote(id)})
+})
+
 app.get('/details', passport.authenticate('jwt', {session: false}), function (req, res) {
     res.json(authUser)
 })
