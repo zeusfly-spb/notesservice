@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false
       },
       text: {
-        type: Sequelize.STRING(1000)
+        type: Sequelize.STRING(1000) + ' CHARSET utf8 COLLATE utf8_unicode_ci'
       },
       link: {
         type: Sequelize.STRING(36),

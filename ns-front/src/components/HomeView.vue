@@ -14,10 +14,16 @@
                 exit_to_app
             </i>
         </div>
+        <div
+            class="work-place"
+        >
+            <notes/>
+        </div>
     </div>
 </template>
 
 <script>
+    import Notes from './Notes'
     export default {
         name: 'HomeView',
         computed: {
@@ -26,6 +32,9 @@
             },
             authUser () {
                 return this.$store.state.authUser
+            },
+            notes () {
+                return this.$store.state.notes
             }
         },
         methods: {
@@ -34,12 +43,21 @@
                 this.$router.replace('/login')
             }
         },
-        mounted () {
+        watch: {
+            authUser (val) {
+                val ? this.$store.dispatch('setNotes', val.id) : null
+            }
+        },
+        components: {
+            Notes
         }
     }
 </script>
 
 <style scoped>
+    .work-place {
+        margin-top: 1em;
+    }
     i {color: rgba(0,0,0,.54);}
     a {
         text-decoration: none;

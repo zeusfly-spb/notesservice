@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        dialog: false,
         notes: [],
         token: null,
         authUser: null,
@@ -50,11 +51,21 @@ export const store = new Vuex.Store({
                     .catch(e => reject(e))
             })
         },
-        setNotes ({commit, state}) {
+        setNotes ({commit}, id) {
             return new Promise((resolve, reject) => {
-                Vue.axios.post('/notes', {user_id: state.authUser.id})
+                Vue.axios.post('/notes', {user_id: id})
                     .then(res => {
                         commit('SET_NOTES', res.data)
+                        resolve(res)
+                    })
+                    .catch(e => reject(e))
+            })
+        },
+        addNote ({commit}, data) {
+            return new Promise((resolve, reject) => {
+                Vue.axios.post('/addnote', {...data})
+                    .then(res => {
+                        commit('ADD_NOTE', res.data)
                         resolve(res)
                     })
                     .catch(e => reject(e))
@@ -62,6 +73,12 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
+        ADD_NOTE (state, note) {
+            state.notes.unshift(note)
+        },
+        SET_DIALOG_VALUE (state, value) {
+            state.dialog = value
+        },
         SET_NOTES (state, notes) {
             state.notes = notes
         },

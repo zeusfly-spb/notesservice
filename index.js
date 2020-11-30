@@ -63,6 +63,20 @@ app.post('/login', async function (req, res) {
     }
 })
 
+app.post('/notes', passport.authenticate('jwt', {session: false}), async function (req, res) {
+    try {
+        const user_id = req.body.user_id
+        res.json(await UserController.userNotes(user_id))
+    } catch (e) {
+        res.json({error: `Notes load error: ${e}`})
+    }
+})
+
+app.post('/addnote', passport.authenticate('jwt', {session: false}), async function (req, res) {
+    const user_id = req.body.user_id
+    const text = req.body.text
+    res.json(await UserController.addNote({userId: user_id, text: text}))
+})
 app.get('/details', passport.authenticate('jwt', {session: false}), function (req, res) {
     res.json(authUser)
 })

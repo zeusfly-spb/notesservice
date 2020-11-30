@@ -1,6 +1,7 @@
 const argon2 = require('argon2')
 const models = require('../models')
 const User = models.User
+const Note = models.Note
 
 
 const register = async data => {
@@ -33,8 +34,27 @@ const findById = async id => {
     }
 }
 
+const userNotes = async id => {
+    try {
+        const user = await User.findByPk(id)
+        return Promise.resolve(await user.getNotes())
+    } catch (e) {
+        return Promise.reject(new Error(`User notes load failed: ${e}`))
+    }
+}
+
+const addNote = async data => {
+    try {
+        return Promise.resolve(await Note.create({...data}))
+    } catch (e) {
+        return Promise.reject(new Error(`Create note error: ${e}`))
+    }
+}
+
 module.exports = { 
     register,
     findByLogin,
-    findById
+    findById,
+    userNotes,
+    addNote
 }

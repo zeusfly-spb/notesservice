@@ -9,6 +9,14 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
+import 'moment/locale/ru'
+import moment from 'moment'
+moment.locale('ru')
+import VueMoment from 'vue-moment'
+Vue.use(VueMoment, {
+    moment,
+})
+
 Vue.axios.defaults.headers.common['Accept'] = 'application/json'
 Vue.axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 Vue.axios.interceptors.response.use(
