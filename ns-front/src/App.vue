@@ -11,6 +11,9 @@
 export default {
   name: 'App',
   computed: {
+    editingNote () {
+      return this.$store.state.editingNote
+    },
     token () {
       return this.$store.state.token
     },

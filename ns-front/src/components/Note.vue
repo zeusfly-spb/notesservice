@@ -28,6 +28,7 @@
             <i 
                 class="material-icons small valign green-text clickable"
                 title="Редактировать"
+                @click="toEdit"
             >
                 edit
             </i>
@@ -46,6 +47,11 @@
         props: {
             index: Number,
             note: Object
+        },
+        methods: {
+            toEdit () {
+                this.$store.commit('SET_EDITING_NOTE', this.note)
+            }
         }
     }
 </script>

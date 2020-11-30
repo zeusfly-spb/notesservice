@@ -25,7 +25,7 @@
             </tbody>
         </table>
         <modal
-            v-show="dialog"
+            v-show="dialog || editingNote"
             @close="hideDialog"
         />
     </div>
@@ -38,6 +38,9 @@
     export default {
         name: 'Notes',
         computed: {
+            editingNote () {
+                return this.$store.state.editingNote
+            },
             dialog: {
                 get () {
                     return this.$store.state.dialog
@@ -55,6 +58,7 @@
                 this.$store.commit('SET_DIALOG_VALUE', false)
             },
             showDialog () {
+                this.$store.commit('SET_EDITING_NOTE', null)
                 this.$store.commit('SET_DIALOG_VALUE', true)
             }
         },

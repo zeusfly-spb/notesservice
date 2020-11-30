@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        editingNote: null,
         dialog: false,
         notes: [],
         token: null,
@@ -73,6 +74,9 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
+        SET_EDITING_NOTE (state, note) {
+            state.editingNote = note
+        },
         ADD_NOTE (state, note) {
             state.notes.unshift(note)
         },

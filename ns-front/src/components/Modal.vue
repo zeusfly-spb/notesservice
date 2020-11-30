@@ -7,9 +7,9 @@
         aria-describedby="modalDescription"
       >
         <header
-          :class="{'update-header' : note, 'modal-header': !note}"
+          :class="{'update-header' : editingNote, 'modal-header': !editingNote}"
         >
-            {{ note ? 'Редактирование заметки' : 'Новая заметка' }}
+            {{ editingNote ? 'Редактирование заметки' : 'Новая заметка' }}
         </header>
         <section
           class="modal-body"
@@ -31,7 +31,7 @@
                     Отмена
                 </button>
                 <button
-                    v-if="!note"
+                    v-if="!editingNote"
                     type="button"
                     class="ns-button bg-green"
                     :disabled="!valid"
@@ -40,9 +40,9 @@
                     Добавить
                 </button>
                 <button
-                    v-if="note"
+                    v-if="editingNote"
                     type="button"
-                    class="btn-blue"
+                    class="ns-button btn-blue"
                     :disabled="!valid"
                     @click="updateNote"
                 >
@@ -64,6 +64,9 @@
           text: ''            
         }),
         computed: {
+          editingNote () {
+            return this.$store.state.editingNote
+          },
           authUser () {
             return this.$store.state.authUser
           },
@@ -82,6 +85,8 @@
               this.text = ''
             },
             close () {
+                this.$store.commit('SET_EDITING_NOTE', null)
+                this.text = ''
                 this.$emit('close')
             },
             addNote () {
@@ -98,6 +103,9 @@
           }
         },
         watch: {
+          editingNote (val) {
+            val ? this.text = val.text : null
+          },
           dialog (val) {
             !val ? this.resetInputs() : this.$refs.textarea.focus()
           }
@@ -135,7 +143,7 @@
 
   .update-header {
       padding: .7em;
-      background-color:  blue;
+      background-color:   #47a7f5;
       border-bottom: 1px solid #eeeeee;
       color: white;
       justify-content: space-between;
@@ -175,8 +183,8 @@
   }
   .btn-blue {
       color: white;
-      background: blue;
-      border: 1px solid #4AAE9B;
+      background: #47a7f5;
+      border: 1px solid #47a7f5;
       border-radius: 2px;
    }
 
