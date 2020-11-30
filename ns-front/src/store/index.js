@@ -120,7 +120,7 @@ export const store = new Vuex.Store({
             state.editingNote = note
         },
         ADD_NOTE (state, note) {
-            state.notes.unshift(note)
+            state.notes.push(note)
         },
         SET_DIALOG_VALUE (state, value) {
             state.dialog = value

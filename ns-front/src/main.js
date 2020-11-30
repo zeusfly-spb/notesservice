@@ -17,6 +17,9 @@ Vue.use(VueMoment, {
     moment,
 })
 
+import VueClipboards from 'vue-clipboards'
+Vue.use(VueClipboards)
+
 Vue.axios.defaults.headers.common['Accept'] = 'application/json'
 Vue.axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 Vue.axios.interceptors.response.use(

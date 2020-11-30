@@ -28,6 +28,12 @@ export default {
 </script>
 
 <style>
+  .uselect {
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+  }
   .red-text {
     color: #B71C1C;    
   }

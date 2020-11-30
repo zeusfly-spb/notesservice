@@ -16,23 +16,26 @@
             {{ note.createdAt | moment('DD/MM/YY HH:mm') }}
         </td>
         <td
-            class="link-field"
+            align="center"
+            class="link-field uselect"
         >
             <i
                 v-if="note.link" 
-                class="material-icons clickable"
+                class="material-icons clickable valign green-text"
                 title="Скопировать ссылку"
+                v-clipboard="link"
+                @success="infoLink"
             >
                 link
             </i>
         </td>
         <td
             align="right"
-            class="actions"
+            class="actions uselect"
         >
             <i 
                 class="material-icons small valign blue clickable"
-                title="Редактировать"
+                title="Поделиться"
                 @click="shareNote"
             >
                 share
@@ -62,11 +65,17 @@
             note: Object
         },
         computed: {
+            link () {
+                return `${document.location.host}/shared/${this.note.link}`
+            },
             shared () {
                 return !!this.note.link
             }
         },
         methods: {
+            infoLink () {
+                alert('Ссылка скопирована в буфер обмена')
+            },
             shareNote () {
                 this.$store.dispatch('shareNote', {
                     note_id: this.note.id,
